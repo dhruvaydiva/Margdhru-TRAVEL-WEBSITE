@@ -1,0 +1,31 @@
+-> Initial Setup
+--------------------------------
+python -m venv ai
+
+ai\scripts\activate
+
+cd Margdhru
+
+pip install -r requirements.txt
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py seed_demo_data
+
+python manage.py runserver
+
+##########################
+-> Starting the Server Evertime
+----------------------------------------------
+.venv\scripts\activate
+
+cd Margdhru
+
+python manage.py runserver
+
+
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/

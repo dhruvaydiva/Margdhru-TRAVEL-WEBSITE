@@ -1,0 +1,7 @@
+<svg width="160" height="44" viewBox="0 0 160 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="42" height="42" rx="10" fill="#FF6B35"/>
+  <path d="M9 27L34 10L27 34L21 25L9 27Z" fill="white"/>
+  <path d="M21 25L17 36L24 29" fill="#FFD166"/>
+  <text x="51" y="19" font-family="Georgia, serif" font-size="17" font-weight="700" fill="#FF6B35">Go</text>
+  <text x="51" y="38" font-family="Georgia, serif" font-size="17" font-weight="700" fill="#FFD166">Yatra</text>
+</svg>

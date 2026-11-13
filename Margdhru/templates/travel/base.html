@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Margdhru{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'travel/css/styles.css' %}?v=3">
+    <script src="{% static 'travel/js/app.js' %}?v=3" defer></script>
+    <script>
+        (function(){
+            var t = localStorage.getItem('gy-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+</head>
+<body data-user-key="{% if user.is_authenticated %}{{ user.username }}{% else %}guest{% endif %}">
+    <div class="scroll-progress" data-scroll-progress></div>
+
+    <!-- SIDEBAR -->
+    <header class="site-header">
+        <nav class="navbar">
+            <a class="brand-mark" href="{% url 'home' %}">
+                <img src="{% static 'travel/img/margdhru_logo.png' %}" alt="Margdhru logo" class="margdhru-logo">
+                <span class="brand">Margdhru</span>
+            </a>
+            <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu">
+                <span></span><span></span><span></span>
+                Menu
+            </button>
+            <div class="nav-links" id="site-menu" data-site-menu>
+                <span class="nav-section-label">Navigate</span>
+                <a href="{% url 'home' %}">Explore</a>
+                <a href="{% url 'hotels' %}">Hotels</a>
+                <a href="{% url 'transport' %}">Travel</a>
+                <a href="{% url 'packages' %}">Packages</a>
+                <span class="nav-section-label">Account</span>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'history' %}">My History</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-button" href="{% url 'book_trip' %}">✈ Book Now</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                    <a class="nav-button" href="{% url 'book_trip' %}">✈ Book Now</a>
+                {% endif %}
+                <button class="theme-toggle" id="theme-toggle" type="button">
+                    <span class="toggle-icon">🌙</span>
+                    <span id="theme-label">Light Mode</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <span class="topbar-title">{% block topbar_title %}Margdhru — Turning journeys into memories{% endblock %}</span>
+        <div class="topbar-right">
+            {% if user.is_authenticated %}
+                👋 &nbsp;{{ user.username }}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <span class="footer-brand">Margdhru</span>
+        <span class="footer-tagline">Turning journeys into memories – Margdhru | Druva Kumar V</span>
+        <span class="saved-count" data-saved-count>Saved trips: 0</span>
+    </footer>
+
+    <button class="back-to-top" type="button" data-back-to-top>↑</button>
+
+    <script>
+        (function(){
+            var btn = document.getElementById('theme-toggle');
+            var label = document.getElementById('theme-label');
+            function applyTheme(t){
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem('gy-theme', t);
+                btn.querySelector('.toggle-icon').textContent = t === 'dark' ? '🌙' : '☀️';
+                label.textContent = t === 'dark' ? 'Light Mode' : 'Dark Mode';
+            }
+            applyTheme(localStorage.getItem('gy-theme') || 'dark');
+            btn.addEventListener('click', function(){
+                applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            });
+        })();
+    </script>
+</body>
+</html>
