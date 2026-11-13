@@ -23,7 +23,7 @@ A Django MVT project for planning holidays, booking hotels, choosing travel opti
 ## Setup
 
 ```powershell
-python -m venv .ai
+python -m venv ai
 .\ai\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
